@@ -10,15 +10,14 @@ gem 'jbuilder', '~> 1.2'
 gem 'octokit'
 gem 'rest-client'
 gem 'json'
+gem 'pg'
 
 group :production do
 	gem 'rails_12factor'
-	gem 'pg'
 	gem 'unicorn'
 end
 
 group :development do
-	gem 'sqlite3'
 	gem 'pry'
 	gem 'better_errors'
   gem 'binding_of_caller'
