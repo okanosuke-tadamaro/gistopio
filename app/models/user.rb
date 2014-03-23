@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	has_many :posts
 
 	def self.oauth_link
 		return "https://github.com/login/oauth/authorize?client_id=#{ENV['CLIENT_ID']}"
