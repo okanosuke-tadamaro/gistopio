@@ -1,7 +1,7 @@
 ###gistopio
 
 ###ERD
-!(http://okaoka.miraiserver.com/ga/project1.jpg)
+http://okaoka.miraiserver.com/ga/project1.jpg
 
 ###User Stories
 [Link to Pivotal Tracker](https://www.pivotaltracker.com/projects/1046238)
