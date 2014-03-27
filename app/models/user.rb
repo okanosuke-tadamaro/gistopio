@@ -12,5 +12,4 @@ class User < ActiveRecord::Base
 	def self.new_client(response)
 		return Octokit::Client.new :access_token => response["access_token"]
 	end
-
 end
