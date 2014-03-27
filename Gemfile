@@ -9,7 +9,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'octokit'
 gem 'rest-client'
-gem 'json'
 gem 'pg'
 
 group :production do
