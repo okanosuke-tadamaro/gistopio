@@ -23,8 +23,8 @@ class PostsController < ApplicationController
 	end
 
 	def update
-		@post = current_user.posts.create(post_params)
-		redirect_to @post
+		@post = current_user.posts.find(params[:id]).update(post_params)
+		redirect_to posts_path
 	end
 
 	def destroy
@@ -36,7 +36,7 @@ class PostsController < ApplicationController
 	private
 
 	def post_params
-		params.require('post').permit(:title, :body, :post_status)
+		params.require('post').permit(:title, :body, :sync_status, :public_status)
 	end
 
 end

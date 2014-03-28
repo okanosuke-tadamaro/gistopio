@@ -1,4 +1,4 @@
-<p><%= current_user.username %></p>
+<%= render 'user_panel' %>
 <p><%= link_to "New", new_post_path %></p>
 
 <% @posts.each do |post| %>

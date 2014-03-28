@@ -1,3 +1,14 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.wrapper {
+	width: 980px;
+	margin: 0 auto;
+}
+
+.user_panel {
+	img {
+		width: 100px;
+	}
+}

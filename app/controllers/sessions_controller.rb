@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
 		session[:github_access_token] = oauth_response["access_token"]
 
 		unless User.exists?(username: client.login)
-			User.create(username: client.login, github_access_token: oauth_response["access_token"])
+			User.create(username: client.login, github_access_token: oauth_response["access_token"], avatar_url: "#{client.avatar_url}#{client.gravatar_id}")
 		end
 
 		# flash[:notice] = "Successfully signed in"
