@@ -7,14 +7,14 @@
 	<p><%= @post.body %></p>
 </div>
 
+<% @comments.each do |comment| %>
+	<div class="comment_block">
+		<p><%= comment.body %></p>
+	</div>
+<% end %>
+
 <%= form_for [@post, @post.comments.build] do |f| %>
 	<%= f.label :body %>
 	<%= f.text_area :body %>
 	<%= f.submit %>
-<% end %>
-
-<% @post.comments.each do |comment| %>
-	<div class="comment_block">
-		<p><%= comment.body %></p>
-	</div>
 <% end %>
