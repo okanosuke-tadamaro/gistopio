@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 	has_many :posts
-	has_many :comments, :primary_key => "author_id"
+	has_many :comments, :foreign_key => "author_id"
 
 	def self.oauth_link
 		return "https://github.com/login/oauth/authorize?client_id=#{ENV['CLIENT_ID']}"

@@ -7,6 +7,7 @@ class PostsController < ApplicationController
 
 	def show
 		@post = current_user.posts.find(params[:id])
+		@body = markdown(@post.body)
 		@comments = @post.comments.all
 	end
 
@@ -16,6 +17,10 @@ class PostsController < ApplicationController
 
 	def create
 		@post = current_user.posts.create(post_params)
+		if includes_code?(@post.body)
+			code = get_code(@post.body)
+			binding.pry
+		end
 		redirect_to posts_path
 	end
 

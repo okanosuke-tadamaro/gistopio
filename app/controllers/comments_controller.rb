@@ -8,6 +8,11 @@ class CommentsController < ApplicationController
 		redirect_to post_path(@post)
 	end
 
+	def index
+		@post = Post.find(params[:post_id])
+		@comments = @post.comments.all
+	end
+
 	private
 
 	def comment_params
