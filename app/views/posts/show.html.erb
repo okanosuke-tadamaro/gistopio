@@ -1,6 +1,10 @@
 <%= render 'user_panel' %>
 
-<p><%= link_to "Back to List", posts_path %></p>
+<ul>
+	<li><%= link_to "Back to List", posts_path %></li>
+	<li><%= link_to "Edit", edit_post_path %></li>
+	<li><%= link_to "Delete"	, post_path(@post), method: "delete" %></li>
+</ul>
 
 <div class="posts">
 	<h4><%= @post.title %></h4>

@@ -33,7 +33,19 @@ class PostsController < ApplicationController
 	end
 
 	def update
-		@post = current_user.posts.find(params[:id]).update(post_params)
+		@post = current_user.posts.find(params[:id])
+		@post.update(post_params)
+		@post.tags.each do |post_tag|
+			@post.tags.delete(post_tag) if params[:tags].include?(post_tag.name) == false
+		end
+		params[:tags].split.each do |tag|
+			if Tag.exists?(name: tag) && @post.tags.exists?(name: tag) == false
+				record = Tag.find_by(name: tag)
+				@post.tags << record
+			elsif Tag.exists?(name: tag) == false
+				@post.tags.create(name: tag)
+			end
+		end
 		redirect_to posts_path
 	end
 
