@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  helper_method :current_user, :markdown, :includes_code?, :identify_language
+  helper_method :current_user, :markdown, :includes_code?, :get_code, :identify_language
 
   private
 
@@ -16,9 +16,9 @@ class ApplicationController < ActionController::Base
   end
 
   def get_code(text)
-  	text.scan(/```(.*?)```/m)
+  	text.scan(/```(.*?)```/m).flatten
   end
-
+  
   def includes_code?(text)
 		code = get_code(text)
 		if code.size > 0

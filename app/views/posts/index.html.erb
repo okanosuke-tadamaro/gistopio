@@ -4,6 +4,11 @@
 <% @posts.each do |post| %>
 	<div class="posts">
 		<h4><%= link_to post.title, post_path(post) %></h4>
+		<ul>
+			<% post.tags.each do |tag| %>
+				<li><%= tag.name %></li>
+			<% end %>
+		</ul>
 		<p><%= raw markdown(post.body) %></p>
 		<p><%= link_to "Edit", edit_post_path(post) %> / <%= link_to "Delete", post_path(post), method: "delete" %> / <%= link_to "Comments (#{post.comments.all.size})", post_comments_path(post) %></p>
 	</div>

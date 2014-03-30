@@ -1,6 +1,8 @@
 <%= form_for @post do |f| %>
 	<p><%= f.label :title %><br>
 	<%= f.text_field :title %></p>
+	<p><%= label_tag :tags %><br>
+		<%= text_field_tag :tags %></p>
 	<p><%= f.label :body %><br>
 	<%= f.text_area :body %></p>
 	<p><%= f.submit %></p>

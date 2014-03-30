@@ -2,19 +2,24 @@
 
 <p><%= link_to "Back to List", posts_path %></p>
 
-<div class="post">
+<div class="posts">
 	<h4><%= @post.title %></h4>
+	<ul>
+		<% @post.tags.each do |tag| %>
+			<li><%= tag.name %></li>
+		<% end %>
+	</ul>
 	<p><%= raw markdown(@post.body) %></p>
 </div>
 
 <% @comments.each do |comment| %>
-	<div class="comment_block">
+	<div class="comments">
 		<p><%= comment.body %></p>
 	</div>
 <% end %>
 
 <%= form_for [@post, @post.comments.build] do |f| %>
-	<%= f.label :body %>
-	<%= f.text_area :body %>
-	<%= f.submit %>
+	<p><%= f.label :body %><br>
+	<%= f.text_area :body %></p>
+	<p><%= f.submit %></p>
 <% end %>

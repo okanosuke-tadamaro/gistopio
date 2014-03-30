@@ -17,9 +17,13 @@ class PostsController < ApplicationController
 
 	def create
 		@post = current_user.posts.create(post_params)
-		if includes_code?(@post.body)
-			code = get_code(@post.body)
-			binding.pry
+		params[:tags].split.each do |tag|
+			if Tag.exists?(name: tag)
+				record = Tag.find_by(name: tag)
+				@post.tags << record
+			else
+				@post.tags.create(name: tag)
+			end
 		end
 		redirect_to posts_path
 	end
@@ -42,7 +46,7 @@ class PostsController < ApplicationController
 	private
 
 	def post_params
-		params.require('post').permit(:title, :body, :sync_status, :public_status)
+		params.require('post').permit(:title, :body, :sync_status, :public_status, :tags)
 	end
 
 end
