@@ -1,10 +1,3 @@
-GIT
-  remote: git@github.com:chrislo/sourceclassifier.git
-  revision: c79886968c113033d692ab2d4998d1e7f0195135
-  specs:
-    sourceclassifier (0.2.3)
-      classifier
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -41,8 +34,6 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.1.4)
-    classifier (1.3.4)
-      fast-stemmer (>= 1.0.0)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -60,7 +51,6 @@ GEM
     execjs (2.0.2)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
-    fast-stemmer (1.0.2)
     hike (1.2.3)
     i18n (0.6.9)
     jbuilder (1.5.3)
@@ -196,7 +186,6 @@ DEPENDENCIES
   rspec-rails (~> 3.0.0.beta)
   sass-rails (~> 4.0.0)
   sdoc
-  sourceclassifier!
   turbolinks
   uglifier (>= 1.3.0)
   unicorn

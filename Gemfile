@@ -10,7 +10,6 @@ gem 'jbuilder', '~> 1.2'
 gem 'octokit'
 gem 'redcarpet'
 gem 'coderay'
-gem 'sourceclassifier', :git => 'git@github.com:chrislo/sourceclassifier.git'
 gem 'rest-client'
 gem 'pg'
 

@@ -13,7 +13,7 @@
 			<li><%= tag.name %></li>
 		<% end %>
 	</ul>
-	<p><%= raw markdown(@post.body) %></p>
+	<p><%= markdown(@post.body) %></p>
 </div>
 
 <% @comments.each do |comment| %>
