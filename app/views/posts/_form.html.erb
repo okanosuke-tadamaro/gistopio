@@ -5,5 +5,7 @@
 	<%= text_field_tag :tags, list_tags(@post.tags) %></p>
 	<p><%= f.label :body %><br>
 	<%= f.text_area :body %></p>
+	<p><%= f.label :public_status %> <%= f.check_box :public_status %></p>
+	<p><%= f.label :sync_status %> <%= f.check_box :sync_status %></p>
 	<p><%= f.submit %></p>
 <% end %> 

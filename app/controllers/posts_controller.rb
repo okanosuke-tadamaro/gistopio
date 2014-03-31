@@ -16,6 +16,7 @@ class PostsController < ApplicationController
 
 	def create
 		@post = current_user.posts.create(post_params)
+		
 		params[:tags].split.each do |tag|
 			if Tag.exists?(name: tag)
 				record = Tag.find_by(name: tag)
@@ -24,6 +25,13 @@ class PostsController < ApplicationController
 				@post.tags.create(name: tag)
 			end
 		end
+		
+		if @post.sync_status
+			gist = @post.create_gist(current_user.github_access_token)
+			@post.gist_url = gist
+			@post.save
+		end
+
 		redirect_to posts_path
 	end
 
@@ -52,6 +60,11 @@ class PostsController < ApplicationController
 		@post = current_user.posts.find(params[:id])
 		@post.destroy
 		redirect_to posts_path
+	end
+
+	def tag_view
+		@tag = Tag.find_by(name: params[:tag])
+		@posts = @tag.posts.where(user_id: current_user.id)
 	end
 
 	private

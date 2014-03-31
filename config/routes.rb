@@ -1,13 +1,15 @@
 Gistly::Application.routes.draw do
 
+	root "sessions#index"
+	
+	get "/posts/tags/:tag" => "posts#tag_view"
+
 	resources :users, :only => [:show]
 	resources :posts do
 		resources :comments, shallow: true
 	end
 
-  root "sessions#index"
   get "sessions/index"
-  get 'posts' => "posts#index"
   get "github/callback" => "sessions#callback"
 
 end

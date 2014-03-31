@@ -1,17 +1,18 @@
 <%= render 'user_panel' %>
-<p><%= link_to "New", new_post_path %></p>
+
+<ul>
+	<li><%= link_to "Back to List", posts_path %></li>
+</ul>
 
 <% @posts.each do |post| %>
 	<div class="posts">
 		<h4><%= link_to post.title, post_path(post) %></h4>
 		<ul>
 			<% post.tags.each do |tag| %>
-				<li><%= link_to tag.name, "/posts/tags/#{tag.name}" %></li>
+				<li><%= tag.name %></li>
 			<% end %>
 		</ul>
 		<p><%= markdown(post.body) %></p>
 		<p><%= link_to "Edit", edit_post_path(post) %> / <%= link_to "Delete", post_path(post), method: "delete" %> / <%= link_to "Comments (#{post.comments.all.size})", post_comments_path(post) %></p>
 	</div>
 <% end %>
-
-<%= render 'form' %>

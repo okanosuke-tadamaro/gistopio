@@ -14,15 +14,6 @@ class ApplicationController < ActionController::Base
   # 	text.scan(/```(.*?)```/m).flatten
   # end
 
-  # def includes_code?(text)
-		# code = get_code(text)
-		# if code.size > 0
-		# 	true
-		# else
-		# 	false
-		# end
-  # end
-
   def list_tags(tags)
     tag_list = []
     tags.each do |tag|
