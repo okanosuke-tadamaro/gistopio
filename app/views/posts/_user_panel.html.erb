@@ -1,4 +1,11 @@
-<div class="user_panel shadow">
-	<img src="<%= current_user.avatar_url %>" alt="">
-	<p><%= current_user.username %></p>	
+<div class="user_panel">
+	<div class="logo shadow">
+		<h1>gistopio</h1>
+		<p><%= current_user.username %></p>
+	</div>
+	<div class="create_new">
+		<a href="#new_modal"><div class="add_box shadow">+</div></a>
+	</div>
 </div>
+
+

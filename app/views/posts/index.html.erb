@@ -1,10 +1,9 @@
 <%= render 'user_panel' %>
 
 <div class="content_panel">
-	<p><%= link_to "New", new_post_path %></p>
 	<% @posts.each do |post| %>
 		<div class="posts shadow">
-			<h4 class="post_title"><i class="fa fa-lemon-o"></i><%= link_to post.title, post_path(post) %></h4>
+			<h4 class="post_title"><i class="fa fa-moon-o"></i><%= link_to post.title, post_path(post) %></h4>
 			<ul class="tags">
 				<% post.tags.each do |tag| %>
 					<li><i class="fa fa-tag"></i><%= link_to tag.name, "/posts/tags/#{tag.name}" %></li>
@@ -15,7 +14,7 @@
 			<div class="post_content"><%= markdown(post.body) %></div>
 			<ul class="action_link">
 				<li class="show_status"><% if post.public_status %><i class="fa fa-unlock"></i>Public<% else %><i class="fa fa-lock"></i>Private<% end %></li>
-				<% if post.sync_status %><li class="show_status"><i class="fa fa-github"></i><%= link_to "View Gist on GitHub", post.gist_url %></li><% end %>
+				<% if post.sync_status %><li class="show_status"><i class="fa fa-github-alt"></i><%= link_to "View Gist on GitHub", post.gist_url %></li><% end %>
 				<li class="action_right"><i class="fa fa-edit"></i><%= link_to "Edit", edit_post_path(post) %></li>
 				<li class="action_right"><i class="fa fa-trash-o"></i><%= link_to "Delete", post_path(post), method: "delete" %></li>
 				<li class="action_right"><i class="fa fa-comments-o"></i><%= link_to "Comments (#{post.comments.all.size})", post_comments_path(post) %></li>
@@ -23,5 +22,11 @@
 			<div class="clear"></div>
 		</div>
 	<% end %>
-	<%= render 'form' %>
+
+	<section class="modal-window" id="new_modal">
+	<div class="modal-inner">
+		<%= render 'form' %>
+	</div>
+	<a href="#!" class="modal-close">&times;</a>
+	</section>
 </div>

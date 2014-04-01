@@ -1,13 +1,14 @@
 class PostsController < ApplicationController
   
 	def index
-		@posts = current_user.posts.all.reverse
+		@posts = current_user.posts.all
     @post = current_user.posts.new
 	end
 
 	def show
-		@post = current_user.posts.find(params[:id])
-		@comments = @post.comments.all
+		@posty = current_user.posts.find(params[:id])
+		@comments = @posty.comments.all
+		@post = current_user.posts.new
 	end
 
 	def new
