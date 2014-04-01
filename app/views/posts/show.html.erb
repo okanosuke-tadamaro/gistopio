@@ -15,36 +15,42 @@
 		<ul class="action_link">
 			<li class="show_status"><% if @posty.public_status %><i class="fa fa-unlock"></i>Public<% else %><i class="fa fa-lock"></i>Private<% end %></li>
 			<% if @posty.sync_status %><li class="show_status"><i class="fa fa-github-alt"></i><%= link_to "View Gist on GitHub", @posty.gist_url %></li><% end %>
-			<li class="action_right"><i class="fa fa-edit"></i><%= link_to "Edit", edit_post_path(@posty) %></li>
+			<li class="action_right"><i class="fa fa-edit"></i><a href="#edit_modal">Edit</a></li>
 			<li class="action_right"><i class="fa fa-trash-o"></i><%= link_to "Delete", post_path(@posty), method: "delete" %></li>
 			<li class="action_right"><i class="fa fa-comments-o"></i><%= link_to "Comments (#{@posty.comments.all.size})", post_comments_path(@posty) %></li>
 		</ul>
-			<div class="clear"></div>
+		<div class="clear"></div>
 
 		<div class="border"></div>
 		<div class="comments">
-		<h4><i class="fa fa-comments-o"></i>Comments</h4>
-		<%= form_for [@posty, @posty.comments.build] do |f| %>
+			<h4><i class="fa fa-comments-o"></i>Comments</h4>
+			<%= form_for [@posty, @posty.comments.build] do |f| %>
 			<p><%= f.label "Post a comment" %><br>
-			<%= f.text_area :body %></p>
-			<p><%= f.submit %></p>
-		<% end %>
-		<% @comments.each do |comment| %>
-			<div class="comments_content">
-				<img src="<%= comment.user.avatar_url %>">
-				<p><%= comment.body %></p>
+				<%= f.text_area :body %></p>
+				<p><%= f.submit %></p>
+				<% end %>
+				<% @comments.each do |comment| %>
+				<div class="comments_content">
+					<img src="<%= comment.user.avatar_url %>">
+					<p><%= comment.body %></p>
+				</div>
+				<% end %>
 			</div>
-		<% end %>
-		</div>
 		</div>
 
-</div>
+	</div>
 
 	<section class="modal-window" id="new_modal">
-	<div class="modal-inner">
-		<%= render 'form' %>
-	</div>
-	<a href="#!" class="modal-close">&times;</a>
+		<div class="modal-inner">
+			<%= render 'form' %>
+		</div>
+		<a href="#!" class="modal-close">&times;</a>
+	</section>
+	<section class="modal-window" id="edit_modal">
+		<div class="modal-inner">
+			<%= render 'edit_form' %>
+		</div>
+		<a href="#!" class="modal-close">&times;</a>
 	</section>
 
 	<ul>
