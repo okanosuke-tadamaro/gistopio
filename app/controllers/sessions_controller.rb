@@ -13,7 +13,8 @@ class SessionsController < ApplicationController
 			User.create(username: client.login, github_access_token: oauth_response["access_token"], avatar_url: "#{client.avatar_url}#{client.gravatar_id}")
 		end
 
-		# flash[:notice] = "Successfully signed in"
+		Post.update(session[:github_access_token])
+
 		redirect_to posts_path
 	end
 

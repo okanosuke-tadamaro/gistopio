@@ -10,6 +10,9 @@ class ApplicationController < ActionController::Base
   	User.find_by :github_access_token => session[:github_access_token]
   end
 
+  def client
+    Octokit::Client.new(access_token: current_user.github_access_token)
+  end
   # def get_code(text)
   # 	text.scan(/```(.*?)```/m).flatten
   # end

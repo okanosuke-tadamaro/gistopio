@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   
 	def index
-		@posts = current_user.posts.all
+		@posts = current_user.posts.all.reverse
     @post = current_user.posts.new
 	end
 
@@ -17,6 +17,7 @@ class PostsController < ApplicationController
 	def create
 		@post = current_user.posts.create(post_params)
 		
+		### Adding Tags
 		params[:tags].split.each do |tag|
 			if Tag.exists?(name: tag)
 				record = Tag.find_by(name: tag)
@@ -26,10 +27,9 @@ class PostsController < ApplicationController
 			end
 		end
 		
+		### Create Gist
 		if @post.sync_status
-			gist = @post.create_gist(current_user.github_access_token)
-			@post.gist_url = gist
-			@post.save
+			@post.create_gist(client)
 		end
 
 		redirect_to posts_path
@@ -42,6 +42,8 @@ class PostsController < ApplicationController
 	def update
 		@post = current_user.posts.find(params[:id])
 		@post.update(post_params)
+
+		### Update Tags
 		@post.tags.each do |post_tag|
 			@post.tags.delete(post_tag) if params[:tags].include?(post_tag.name) == false
 		end
@@ -53,6 +55,16 @@ class PostsController < ApplicationController
 				@post.tags.create(name: tag)
 			end
 		end
+
+		### Update Gist
+		if @post.sync_status && @post.synced? == false
+			gist = @post.create_gist(client)
+		elsif @post.synced? && @post.sync_status == false
+			@post.delete_gist(client)
+		else
+			@post.edit_gist(client)
+		end
+
 		redirect_to posts_path
 	end
 

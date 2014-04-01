@@ -6,7 +6,7 @@ module ApplicationHelper
 				:line_numbers => :inline,
 				:line_number_anchors => false,
 				:break_lines => true,
-				:wrap => :page
+				:css => :class
 				})
 		end
 	end
