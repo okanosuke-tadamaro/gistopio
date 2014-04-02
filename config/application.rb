@@ -25,5 +25,6 @@ module Gistly
 
     # autoload vendor assets
     # config.assets.paths << Rails.root.join("vendor")
+    config.serve_static_assets = true
   end
 end
