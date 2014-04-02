@@ -82,6 +82,12 @@ class PostsController < ApplicationController
 		@post = current_user.posts.new
 	end
 
+	def other_user
+		@user = User.find_by(username: params[:username])
+		@posts =  @user.posts.where(public_status: true)
+		@post = current_user.posts.new
+	end
+
 	private
 
 	def post_params
