@@ -19,5 +19,4 @@ production:
   encoding: unicode
   database: gistly_production
   pool: 5
-  username: tadashiokazaki
   password:
