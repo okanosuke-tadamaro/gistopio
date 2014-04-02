@@ -78,6 +78,7 @@ class PostsController < ApplicationController
 	def tag_view
 		@tag = Tag.find_by(name: params[:tag])
 		@posts = @tag.posts.where(user_id: current_user.id)
+		@post = current_user.posts.new
 	end
 
 	private
