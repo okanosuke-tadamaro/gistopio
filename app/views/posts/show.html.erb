@@ -12,13 +12,15 @@
 		<div class="clear"></div>
 		<div class="border"></div>
 		<div class="post_content"><%= markdown(@posty.body) %></div>
-		<ul class="action_link">
-			<li class="show_status"><% if @posty.public_status %><i class="fa fa-unlock"></i>Public<% else %><i class="fa fa-lock"></i>Private<% end %></li>
-			<% if @posty.sync_status %><li class="show_status"><i class="fa fa-github-alt"></i><%= link_to "View Gist on GitHub", @posty.gist_url %></li><% end %>
-			<li class="action_right"><i class="fa fa-edit"></i><a href="#edit_modal">Edit</a></li>
-			<li class="action_right"><i class="fa fa-trash-o"></i><%= link_to "Delete", post_path(@posty), method: "delete" %></li>
-			<li class="action_right"><i class="fa fa-comments-o"></i><%= link_to "Comments (#{@posty.comments.all.size})", post_comments_path(@posty) %></li>
-		</ul>
+		<% if @posty.id == current_user.id %>
+			<ul class="action_link">
+				<li class="show_status"><% if @posty.public_status %><i class="fa fa-unlock"></i>Public<% else %><i class="fa fa-lock"></i>Private<% end %></li>
+				<% if @posty.sync_status %><li class="show_status"><i class="fa fa-github-alt"></i><%= link_to "View Gist on GitHub", @posty.gist_url %></li><% end %>
+				<li class="action_right"><i class="fa fa-edit"></i><a href="#edit_modal">Edit</a></li>
+				<li class="action_right"><i class="fa fa-trash-o"></i><%= link_to "Delete", post_path(@posty), method: "delete" %></li>
+				<li class="action_right"><i class="fa fa-comments-o"></i><%= link_to "Comments (#{@posty.comments.all.size})", post_comments_path(@posty) %></li>
+			</ul>
+		<% end %>
 		<div class="clear"></div>
 
 		<div class="border"></div>
