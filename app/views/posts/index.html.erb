@@ -13,7 +13,7 @@
 			<div class="clear"></div>
 			<div class="border"></div>
 			<div class="post_content"><%= markdown(post.body) %></div>
-			<% if @posty.id == current_user.id %>
+			<% if post.user.id == current_user.id %>
 				<ul class="action_link">
 					<li class="show_status"><% if post.public_status %><i class="fa fa-unlock"></i>Public<% else %><i class="fa fa-lock"></i>Private<% end %></li>
 					<% if post.sync_status %><li class="show_status"><i class="fa fa-github-alt"></i><%= link_to "View Gist on GitHub", post.gist_url %></li><% end %>

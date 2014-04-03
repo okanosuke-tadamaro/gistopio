@@ -11,6 +11,7 @@ Gistly::Application.routes.draw do
 
   get "sessions/index"
   get "github/callback" => "sessions#callback"
+  get "/logout" => "sessions#destroy"
 
   get "/:username" => "posts#other_user"
 

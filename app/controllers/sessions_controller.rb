@@ -18,4 +18,9 @@ class SessionsController < ApplicationController
 		redirect_to posts_path
 	end
 
+	def destroy
+		session[:github_access_token] = nil
+		redirect_to posts_path
+	end
+
 end
