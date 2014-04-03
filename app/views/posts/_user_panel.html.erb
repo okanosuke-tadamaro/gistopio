@@ -7,12 +7,12 @@
 		<a href="#new_modal"><div class="add_box shadow"><i class="fa fa-plus-square"></i>Compose</div></a>
 		<% if params[:action] == 'show' || params[:action] == 'tag_view' %><a href="/posts"><div class="add_box shadow"><i class="fa fa-step-backward"></i>Back to List</div></a><% end %>
 		<% if params[:action] == 'show' %>
-			<a href="#edit_modal"><div class="add_box shadow"><i class="fa fa-pencil-square-o"></i>Edit</div></a>
 			<% if @posty.user.id == current_user.id %>
+				<a href="#edit_modal"><div class="add_box shadow"><i class="fa fa-pencil-square-o"></i>Edit</div></a>
 				<%= link_to post_path(@posty), method: "delete" do %>
 					<div class="add_box shadow"><i class="fa fa-trash-o"></i>Destroy</div>
 				<% end %>
-			<% end %>
+		<% end %>
 		<% end %>
 	</div>
 </div>
