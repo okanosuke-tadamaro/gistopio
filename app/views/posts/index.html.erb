@@ -16,11 +16,9 @@
 			<ul class="action_link">
 				<li class="show_status"><% if post.public_status %><i class="fa fa-unlock"></i>Public<% else %><i class="fa fa-lock"></i>Private<% end %></li>
 				<% if post.sync_status %><li class="show_status"><i class="fa fa-github-alt"></i><%= link_to "View Gist on GitHub", post.gist_url %></li><% end %>
-				<% if post.user.id == current_user.id %>
 				<li class="action_right"><i class="fa fa-edit"></i><a href="/posts/<%= post.id %>#edit_modal">Edit</a></li>
 				<li class="action_right"><i class="fa fa-trash-o"></i><%= link_to "Delete", post_path(post), method: "delete" %></li>
 				<li class="action_right"><i class="fa fa-comments-o"></i><%= link_to "Comments (#{post.comments.all.size})", post_comments_path(post) %></li>
-				<% end %>
 			</ul>
 			<div class="clear"></div>
 		</div>
