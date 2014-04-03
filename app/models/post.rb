@@ -29,19 +29,18 @@ class Post < ActiveRecord::Base
   	gisty = client.create_gist(:public => public_status, :files => {"#{title.gsub(" ","_")}.md" => {:content => body}})
   	self.gist_id = gisty.id
   	self.gist_url = gisty.html_url
-  	save
+  	self.save
   end
 
   def delete_gist(client)
   	client.delete_gist(gist_id)
   	self.gist_url = ""
   	self.gist_id = ""
-  	save
-  	return true
+  	self.save
   end
 
   def edit_gist(client)
-  	if body.gsub("\r","") != client.gist(gist_id).files[:"#{title.gsub(" ","_")}.md"].content
+  	if self.body.gsub("\r","") != client.gist(gist_id).files[:"#{title.gsub(" ","_")}.md"].content
   		client.edit_gist(gist_id, {:files => {"#{title.gsub(" ","_")}.md" => {:content => body}}})
   		return true
   	end

@@ -62,7 +62,7 @@ class PostsController < ApplicationController
 			gist = @post.create_gist(client)
 		elsif @post.synced? && @post.sync_status == false
 			@post.delete_gist(client)
-		else
+		elsif @post.synced? && @post.sync_status == true
 			@post.edit_gist(client)
 		end
 
