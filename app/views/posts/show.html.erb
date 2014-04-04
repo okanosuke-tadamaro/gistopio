@@ -35,7 +35,7 @@
 				<div class="comments_content">
 					<img src="<%= comment.user.avatar_url %>">
 					<p><%= comment.body %></p>
-					<% if comment.user.id = current_user.id %><div class="comment_delete"><%= link_to "Delete", comment_path(comment), method: "delete" %></div><% end %>
+					<% if comment.user.id == current_user.id %><div class="comment_delete"><%= link_to "Delete", comment_path(comment), method: "delete" %></div><% end %>
 				</div>
 				<% end %>
 			</div>
