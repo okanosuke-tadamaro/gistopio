@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+	before_action :block_user, only: [:update, :destroy]
+
 	def index
 		@posts = current_user.posts.all
     @post = current_user.posts.new
@@ -18,7 +20,6 @@ class PostsController < ApplicationController
 	def create
 		@post = current_user.posts.create(post_params)
 		
-		### Adding Tags
 		params[:tags].split.each do |tag|
 			if Tag.exists?(name: tag)
 				record = Tag.find_by(name: tag)
@@ -28,7 +29,6 @@ class PostsController < ApplicationController
 			end
 		end
 		
-		### Create Gist
 		if @post.sync_status
 			@post.create_gist(client)
 		end
@@ -46,7 +46,6 @@ class PostsController < ApplicationController
 		if @post.user.id == current_user.id
 			@post.update(post_params)
 
-			### Update Tags
 			@post.tags.each do |post_tag|
 				@post.tags.delete(post_tag) if params[:tags].include?(post_tag.name) == false
 			end
@@ -59,7 +58,6 @@ class PostsController < ApplicationController
 				end
 			end
 
-			### Update Gist
 			if @post.sync_status && @post.synced? == false
 				gist = @post.create_gist(client)
 			elsif @post.synced? && @post.sync_status == false

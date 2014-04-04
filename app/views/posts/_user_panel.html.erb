@@ -1,11 +1,15 @@
 <div class="user_panel">
+	
 	<div class="logo shadow">
 		<h1>gistopio</h1>
 		<p><%= current_user.username %></p>
 	</div>
+
 	<div class="menu">
 		<a href="#new_modal"><div class="add_box shadow"><i class="fa fa-plus-square"></i>Compose</div></a>
-		<% if params[:action] == 'show' || params[:action] == 'tag_view' %><a href="/posts"><div class="add_box shadow"><i class="fa fa-step-backward"></i>Back to List</div></a><% end %>
+		<% if params[:action] == 'show' || params[:action] == 'tag_view' %>
+			<a href="/posts"><div class="add_box shadow"><i class="fa fa-step-backward"></i>Back to List</div></a>
+		<% end %>
 		<% if params[:action] == 'show' %>
 			<% if @posty.user.id == current_user.id %>
 				<a href="#edit_modal"><div class="add_box shadow"><i class="fa fa-pencil-square-o"></i>Edit</div></a>
@@ -15,6 +19,5 @@
 		<% end %>
 		<% end %>
 	</div>
+
 </div>
-
-
