@@ -27,10 +27,10 @@ class ApplicationController < ActionController::Base
   end
 
   def block_user
-    redirect to posts_path if @post.user.id != current_user.id
+    
   end
 
   def check_user
-    
+
   end
 end
