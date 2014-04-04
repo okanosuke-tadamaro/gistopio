@@ -4,11 +4,13 @@
 	<% @posts.each do |post| %>
 		<div class="posts shadow">
 			<h4 class="post_title"><i class="fa fa-pencil-square"></i><%= link_to post.title, post_path(post) %></h4>
+			<% if post.user.id == current_user.id %>
 			<ul class="tags">
 				<% post.tags.each do |tag| %>
 					<li><i class="fa fa-tag"></i><%= link_to tag.name, "/posts/tags/#{tag.name}" %></li>
 				<% end %>
 			</ul>
+			<% end %>
 			<div class="clear"></div>
 			<div class="border"></div>
 			<div class="post_content"><%= markdown(post.body) %></div>
