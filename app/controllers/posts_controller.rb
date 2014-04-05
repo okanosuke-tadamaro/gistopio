@@ -16,22 +16,8 @@ class PostsController < ApplicationController
 
 	def create
 		@post = current_user.posts.create(post_params)
-		
-		params[:tags].split.each do |tag|
-			if Tag.exists?(name: tag)
-				record = Tag.find_by(name: tag)
-				@post.tags << record
-			else
-				@post.tags.create(name: tag)
-			end
-		end
-
 		Tag.create_tags(@post, params[:tags])
-		
-		if @post.sync_status
-			@post.create_gist(client)
-		end
-
+		@post.create_gist(client) if @post.sync_status
 		redirect_to posts_path
 	end
 
