@@ -25,15 +25,7 @@ class PostsController < ApplicationController
 		@posty = current_user.posts.find(params[:id])
 		@posty.update(post_params)
 		Tag.update_tags(@posty, params[:tags])
-
-		if @posty.sync_status && @post.synced? == false
-			@posty.create_gist(client)
-		elsif @posty.synced? && @post.sync_status == false
-			@posty.delete_gist(client)
-		elsif @posty.synced? && @post.sync_status == true
-			@posty.edit_gist(client)
-		end
-
+		Post.update_gists(@posty, client)
 		redirect_to posts_path
 	end
 

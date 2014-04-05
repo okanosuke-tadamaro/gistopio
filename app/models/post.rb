@@ -45,4 +45,14 @@ class Post < ActiveRecord::Base
   		return true
   	end
   end
+
+  def self.update_gists(post, client)
+    if post.sync_status && post.synced? == false
+      post.create_gist(client)
+    elsif post.synced? && post.sync_status == false
+      post.delete_gist(client)
+    elsif post.synced? && post.sync_status == true
+      post.edit_gist(client)
+    end
+  end
 end
