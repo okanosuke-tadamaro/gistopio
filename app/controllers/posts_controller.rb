@@ -1,20 +1,17 @@
 class PostsController < ApplicationController
 
-	before_action :block_user, only: [:update, :destroy]
+	before_action :signed_in?
+	before_action :authorize_post, only: [:update, :destroy]
 
 	def index
 		@posts = current_user.posts.all
-    @post = current_user.posts.new
+    @post = new_post
 	end
 
 	def show
 		@posty = Post.find(params[:id])
 		@comments = @posty.comments.all
-		@post = current_user.posts.new
-	end
-
-	def new
-		@post = current_user.posts.new
+		@post = new_post
 	end
 
 	def create
@@ -42,42 +39,38 @@ class PostsController < ApplicationController
 
 	def update
 		@post = current_user.posts.find(params[:id])
+		@post.update(post_params)
 
-		if @post.user.id == current_user.id
-			@post.update(post_params)
-
-			@post.tags.each do |post_tag|
-				@post.tags.delete(post_tag) if params[:tags].include?(post_tag.name) == false
-			end
-			params[:tags].split.each do |tag|
-				if Tag.exists?(name: tag) && @post.tags.exists?(name: tag) == false
-					record = Tag.find_by(name: tag)
-					@post.tags << record
-				elsif Tag.exists?(name: tag) == false
-					@post.tags.create(name: tag)
-				end
-			end
-
-			if @post.sync_status && @post.synced? == false
-				gist = @post.create_gist(client)
-			elsif @post.synced? && @post.sync_status == false
-				@post.delete_gist(client)
-			elsif @post.synced? && @post.sync_status == true
-				@post.edit_gist(client)
-			end
-
-			redirect_to posts_path
-		else
-			redirect_to posts_path
+		@post.tags.each do |post_tag|
+			@post.tags.delete(post_tag) if params[:tags].include?(post_tag.name) == false
 		end
+
+		params[:tags].split.each do |tag|
+			if Tag.exists?(name: tag) && @post.tags.exists?(name: tag) == false
+				record = Tag.find_by(name: tag)
+				@post.tags << record
+			elsif Tag.exists?(name: tag) == false
+				@post.tags.create(name: tag)
+			end
+		end
+
+		if @post.sync_status && @post.synced? == false
+			@post.create_gist(client)
+		elsif @post.synced? && @post.sync_status == false
+			@post.delete_gist(client)
+		elsif @post.synced? && @post.sync_status == true
+			@post.edit_gist(client)
+		end
+
+		redirect_to posts_path
 	end
 
 	def destroy
-		@post = current_user.posts.find(params[:id])
+		@posty = current_user.posts.find(params[:id])
 		
-		if @post.user.id == current_user.id
-			@post.comments.destroy_all
-			@post.destroy
+		if @posty.user.id == current_user.id
+			@posty.comments.destroy_all
+			@posty.destroy
 			redirect_to posts_path
 		else
 			redirect_to posts_path

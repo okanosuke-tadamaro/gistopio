@@ -5,7 +5,7 @@ Gistly::Application.routes.draw do
 	get "/posts/tags/:tag" => "posts#tag_view"
 
 	resources :users, :only => [:show]
-	resources :posts do
+	resources :posts, :only => [:index, :show, :create, :update, :destroy] do
 		resources :comments, shallow: true
 	end
 
