@@ -25,6 +25,8 @@ class PostsController < ApplicationController
 				@post.tags.create(name: tag)
 			end
 		end
+
+		Tag.create_tags(@post, params[:tags])
 		
 		if @post.sync_status
 			@post.create_gist(client)
