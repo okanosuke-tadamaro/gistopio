@@ -31,14 +31,9 @@ class PostsController < ApplicationController
 
 	def destroy
 		@posty = current_user.posts.find(params[:id])
-		
-		if @posty.user.id == current_user.id
-			@posty.comments.destroy_all
-			@posty.destroy
-			redirect_to posts_path
-		else
-			redirect_to posts_path
-		end
+		@posty.comments.destroy_all
+		@posty.destroy
+		redirect_to posts_path
 	end
 
 	def tag_view
