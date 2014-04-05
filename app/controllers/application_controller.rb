@@ -30,8 +30,6 @@ class ApplicationController < ActionController::Base
 
   def authorize_post
     post = Post.find(params[:id])
-    if post.user != current_user
-      redirect_to posts_path
-    end
+    redirect_to posts_path if post.user != current_user
   end
 end
