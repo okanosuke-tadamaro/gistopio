@@ -19,10 +19,8 @@ class ApplicationController < ActionController::Base
   end
 
   def list_tags(tags)
-    tag_list = []
-    tags.each do |tag|
-      tag_list << tag.name
-    end
+    tag_list = Array.new
+    tags.each { |tag| tag_list << tag.name }
     tag_list.join(" ")
   end
 

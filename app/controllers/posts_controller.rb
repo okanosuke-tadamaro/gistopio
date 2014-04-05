@@ -32,6 +32,7 @@ class PostsController < ApplicationController
 	def destroy
 		@posty = current_user.posts.find(params[:id])
 		@posty.comments.destroy_all
+		@posty.delete_gist(client) if @posty.sync_status
 		@posty.destroy
 		redirect_to posts_path
 	end
