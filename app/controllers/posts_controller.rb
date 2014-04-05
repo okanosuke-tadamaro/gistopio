@@ -22,28 +22,16 @@ class PostsController < ApplicationController
 	end
 
 	def update
-		@post = current_user.posts.find(params[:id])
-		@post.update(post_params)
+		@posty = current_user.posts.find(params[:id])
+		@posty.update(post_params)
+		Tag.update_tags(@posty, params[:tags])
 
-		@post.tags.each do |post_tag|
-			@post.tags.delete(post_tag) if params[:tags].include?(post_tag.name) == false
-		end
-
-		params[:tags].split.each do |tag|
-			if Tag.exists?(name: tag) && @post.tags.exists?(name: tag) == false
-				record = Tag.find_by(name: tag)
-				@post.tags << record
-			elsif Tag.exists?(name: tag) == false
-				@post.tags.create(name: tag)
-			end
-		end
-
-		if @post.sync_status && @post.synced? == false
-			@post.create_gist(client)
-		elsif @post.synced? && @post.sync_status == false
-			@post.delete_gist(client)
-		elsif @post.synced? && @post.sync_status == true
-			@post.edit_gist(client)
+		if @posty.sync_status && @post.synced? == false
+			@posty.create_gist(client)
+		elsif @posty.synced? && @post.sync_status == false
+			@posty.delete_gist(client)
+		elsif @posty.synced? && @post.sync_status == true
+			@posty.edit_gist(client)
 		end
 
 		redirect_to posts_path
