@@ -1,33 +1,24 @@
 <%= render 'user_panel' %>
+<% @posts.each do |post| %>
+		<h4><i class="fa fa-pencil-square"></i><%= link_to post.title, post_path(post) %></h4>
+		<ul>
+			<% post.tags.each do |tag| %>
+			<li><i class="fa fa-tag"></i><%= link_to tag.name, "/posts/tags/#{tag.name}" %></li>
+			<% end %>
+		</ul>
+		<div><%= markdown(post.body) %></div>
+		<ul>
+			<li><% if post.public_status %><i class="fa fa-unlock"></i>Public<% else %><i class="fa fa-lock"></i>Private<% end %></li>
+			<% if post.sync_status %><li class="show_status"><i class="fa fa-github-alt"></i><%= link_to "View Gist on GitHub", post.gist_url %></li><% end %>
+			<li><i class="fa fa-edit"></i><a href="/posts/<%= post.id %>#edit_modal">Edit</a></li>
+			<li><i class="fa fa-trash-o"></i><%= link_to "Delete", post_path(post), method: "delete" %></li>
+			<li><i class="fa fa-comments-o"></i><%= link_to "Comments (#{post.comments.all.size})", post_comments_path(post) %></li>
+		</ul>
+<% end %>
 
-<div class="content_panel">
-	<% @posts.each do |post| %>
-		<div class="posts shadow">
-			<h4 class="post_title"><i class="fa fa-pencil-square"></i><%= link_to post.title, post_path(post) %></h4>
-			<ul class="tags">
-				<% post.tags.each do |tag| %>
-				<li><i class="fa fa-tag"></i><%= link_to tag.name, "/posts/tags/#{tag.name}" %></li>
-				<% end %>
-			</ul>
-			<div class="clear"></div>
-			<div class="border"></div>
-			<div class="post_content"><%= markdown(post.body) %></div>
-			<ul class="action_link">
-				<li class="show_status"><% if post.public_status %><i class="fa fa-unlock"></i>Public<% else %><i class="fa fa-lock"></i>Private<% end %></li>
-				<% if post.sync_status %><li class="show_status"><i class="fa fa-github-alt"></i><%= link_to "View Gist on GitHub", post.gist_url %></li><% end %>
-				<li class="action_right"><i class="fa fa-edit"></i><a href="/posts/<%= post.id %>#edit_modal">Edit</a></li>
-				<li class="action_right"><i class="fa fa-trash-o"></i><%= link_to "Delete", post_path(post), method: "delete" %></li>
-				<li class="action_right"><i class="fa fa-comments-o"></i><%= link_to "Comments (#{post.comments.all.size})", post_comments_path(post) %></li>
-			</ul>
-			<div class="clear"></div>
-		</div>
-	<% end %>
-
-	<section class="modal-window" id="new_modal">
+<section class="modal-window" id="new_modal">
 	<div class="modal-inner">
 		<%= render 'form' %>
 	</div>
 	<a href="#!" class="modal-close">&times;</a>
-	</section>
-
-</div>
+</section>

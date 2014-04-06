@@ -12,6 +12,7 @@ gem 'redcarpet'
 gem 'coderay'
 gem 'rest-client'
 gem 'pg'
+gem 'foundation-rails'
 
 group :production do
 	gem 'rails_12factor'
