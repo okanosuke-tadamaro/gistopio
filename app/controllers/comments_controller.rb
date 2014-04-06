@@ -1,5 +1,12 @@
 class CommentsController < ApplicationController
 
+	before_action :authorize_comment, only: [:destroy]
+
+	def index
+		@post = Post.find(params[:post_id])
+		@comments = @post.comments.all
+	end
+
 	def create
 		@post = Post.find(params[:post_id])
 		@comment = @post.comments.new(comment_params)
@@ -8,16 +15,10 @@ class CommentsController < ApplicationController
 		redirect_to post_path(@post)
 	end
 
-	def index
-		@post = Post.find(params[:post_id])
-		@comments = @post.comments.all
-	end
-
 	def destroy
 		@comment = Comment.find(params[:id])
 		@post = @comment.post
 		@comment.destroy
-
 		redirect_to @post
 	end
 
