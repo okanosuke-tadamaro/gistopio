@@ -28,3 +28,16 @@ Gems used in this project:
 - As a user, I want to have my code blocks syntax highlighted so it can be more readable
 
 https://www.pivotaltracker.com/projects/1046238
+
+###Changes
+- removed new route action view
+- moved tag create logic from posts controller to tag model
+- refactored create gist conditional to one line
+- removed edit view and action
+- moved tag update logic from post controller to tag model
+- moved update gists logic to post model
+- refactored destroy action in posts controller
+- refactored each block for list_tags method in app controller to one line
+- refactored redirect conditional to one line in authorize method
+- minor css refactor
+- removed duplicate css
