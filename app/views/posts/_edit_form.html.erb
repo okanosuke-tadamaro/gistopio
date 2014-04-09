@@ -1,12 +1,29 @@
 <div id="edit_modal" class="reveal-modal" data-reveal>
+<div class="form">
 <%= form_for @posty, :html => {:class => "new_form"} do |f| %>
-	<p><%= f.label :title %><br>
-	<%= f.text_field :title %></p>
-	<p><%= label_tag :tags %><br>
-	<%= text_field_tag :tags, list_tags(@posty.tags) %></p>
-	<p><%= f.label :body %><br>
-	<%= f.text_area :body %></p>
-	<p><%= f.label :public_status %> <%= f.check_box :public_status %> / <%= f.label :sync_status %> <%= f.check_box :sync_status %></p>
-	<p><%= f.submit %></p>
-<% end %> 
+	<div class="row clearfix">
+			<div class="large-12 columns">
+				<h3 class="form_header left">New Post</h3>
+				<div class="right">
+				<%= f.check_box :public_status %><%= f.label :public_status %>
+				<%= f.check_box :sync_status %><%= f.label :sync_status %>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-6 columns"><%= f.label :title %><%= f.text_field :title %></div>
+			<div class="large-6 columns"><%= label_tag :tags %><%= text_field_tag :tags, list_tags(@post.tags) %></div>
+		</div>
+		<div class="row">
+			<div class="large-12 columns">
+				<%= f.label :body %><%= f.text_area :body %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-12 columns">
+				<%= f.submit :class => "button expand" %>
+			</div>
+		</div>
+<% end %>
+</div>
 </div>
