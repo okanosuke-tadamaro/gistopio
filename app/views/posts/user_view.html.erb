@@ -1,12 +1,12 @@
-<% @dated_posts.each do |date_post| %>
+<div class="user_view">
 	<div class="large-2 columns">
-		<div class="date">
-			<%= date_post.first %>
+		<div class="username">
+			<%= params[:username] %>
 		</div>
 	</div>
 	<div class="large-10 columns">
 		<ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-3 posts">
-		<% date_post.last.each do |post| %>
+		<% @posts.each do |post| %>
 			<li>
 				<div class="post">
 					<div class="post_header clearfix">
@@ -35,8 +35,4 @@
 		<% end %>
 		</ul>
 	</div>
-<% end %>
-
-
-
-<%= render 'form' %>
+</div>

@@ -35,6 +35,6 @@ class ApplicationController < ActionController::Base
 
   def authorize_comment
     comment = Comment.find(params[:id])
-    redirect_to posts_path if comment.author != current_user
+    redirect_to posts_path if comment.user != current_user
   end
 end

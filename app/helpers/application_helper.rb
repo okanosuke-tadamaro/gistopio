@@ -3,8 +3,6 @@ module ApplicationHelper
 	class MarkdownRenderer < Redcarpet::Render::HTML
 		def block_code(code, language)
 			CodeRay.highlight(code, language, options = {
-				:line_numbers => :inline,
-				:line_number_anchors => false,
 				:break_lines => true,
 				:css => :class
 				})

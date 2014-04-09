@@ -1,5 +1,6 @@
 class Tag < ActiveRecord::Base
 	has_and_belongs_to_many :posts
+	validates :name, presence: true
 
 	def self.create_tags(post, tags)
 		tags.split.each do |tag|

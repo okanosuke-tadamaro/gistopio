@@ -1,57 +1,50 @@
-<%= render 'user_panel' %>
-
-<div class="content_panel">
-
-	<div class="posts shadow">
-		<h4 class="post_title"><i class="fa fa-lemon-o"></i><%= @posty.title %></h4>
-		<ul class="tags">
-			<% @posty.tags.each do |tag| %>
-			<li><i class="fa fa-tag"></i><%= link_to tag.name, "/posts/tags/#{tag.name}" %></li>
+<div class="each_post">
+	<div class="each_post_header clearfix">
+		<h4 class="left"><i class="fa fa-pencil-square"></i><%= @posty.title %></h4>
+		<div class="status right">
+			<% if @posty.public_status %>
+				<i class="fa fa-unlock"></i>
+			<% else %>
+				<i class="fa fa-lock"></i>
 			<% end %>
-		</ul>
-		<div class="clear"></div>
-		<div class="border"></div>
-		<div class="post_content"><%= markdown(@posty.body) %></div>
-		<% if @posty.user.id == current_user.id %>
-			<ul class="action_link">
-				<li class="show_status"><% if @posty.public_status %><i class="fa fa-unlock"></i>Public<% else %><i class="fa fa-lock"></i>Private<% end %></li>
-				<% if @posty.sync_status %><li class="show_status"><i class="fa fa-github-alt"></i><%= link_to "View Gist on GitHub", @posty.gist_url %></li><% end %>
-				<li class="action_right"><i class="fa fa-edit"></i><a href="#edit_modal">Edit</a></li>
-				<li class="action_right"><i class="fa fa-trash-o"></i><%= link_to "Delete", post_path(@posty), method: "delete" %></li>
-				
-			</ul>
-		<% end %>
-		<div class="clear"></div>
-
-		<div class="border"></div>
-		<div class="comments">
-			<h4><i class="fa fa-comments-o"></i>Comments</h4>
-			<%= form_for [@posty, @posty.comments.build] do |f| %>
-			<p><%= f.label "Post a comment" %><br>
-				<%= f.text_area :body %></p>
-				<p><%= f.submit %></p>
-				<% end %>
-				<% @comments.each do |comment| %>
-				<div class="comments_content">
-					<img src="<%= comment.user.avatar_url %>">
-					<p><%= comment.body %></p>
-					<% if comment.user.id == current_user.id %><div class="comment_delete"><%= link_to "Delete", comment_path(comment), method: "delete" %></div><% end %>
-				</div>
-				<% end %>
-			</div>
+			<% if @posty.sync_status %>
+				<i class="fa fa-github"></i>
+			<% end %>
 		</div>
-
 	</div>
+	<div class="each_post_content"><%= markdown(@posty.body) %></div>
+	<div class="each_post_footer">
+		<ul>
+		<% @posty.tags.each do |tag| %>
+			<li><i class="fa fa-tag"></i><%= link_to tag.name, "/posts/tags/#{tag.name}" %></li>
+		<% end %>
+		</ul>
+	</div>
+</div>
 
-	<section class="modal-window" id="new_modal">
-		<div class="modal-inner">
-			<%= render 'form' %>
+<div class="comments">
+	<div class="comment_header">
+		<h4><i class="fa fa-comments-o"></i>Comments</h4>
+	</div>
+	<div class="comment_form clearfix">
+		<%= form_for [@posty, @posty.comments.build] do |f| %>
+			<p>Post a comment:<br>
+			<div class="row collapse">
+				<div class="large-10 columns"><%= f.text_field :body %></p></div>
+				<div class="large-2 columns"><%= f.submit :class => 'button postfix' %></div>
+			</div>
+		<% end %>
+	</div>
+	<div class="comment_content">
+		<% @comments.each do |comment| %>
+		<div class="row collapse each_comment">
+			<div class="small-2 large-1 columns"><img src="<%= comment.user.avatar_url %>" class="th"></div>
+			<div class="small-10 large-11 columns comment_body"><%= comment.body %></div>
+			<% if comment.user.id == current_user.id %><div class="comment_delete"><%= link_to "Delete", comment_path(comment), method: "delete" %></div><% end %>
 		</div>
-		<a href="#!" class="modal-close">&times;</a>
-	</section>
-	<section class="modal-window" id="edit_modal">
-		<div class="modal-inner">
-			<%= render 'edit_form' %>
-		</div>
-		<a href="#!" class="modal-close">&times;</a>
-	</section>
+		<% end %>
+	</div>
+</div>
+
+<%= render 'form' %>
+<%= render 'edit_form' %>

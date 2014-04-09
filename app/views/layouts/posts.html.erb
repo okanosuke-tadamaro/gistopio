@@ -1,17 +1,54 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>gist</title>
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
-  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-    <%= yield %>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= content_for?(:title) ? yield(:title) : "gistopio" %></title>
+    <%= stylesheet_link_tag    "application" %>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    
+    <div class="fixed">
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="/">gistopio</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+      </ul>
+
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <li><a href="#" data-reveal-id="new_modal" data-reveal><i class="fa fa-plus-square"></i>Compose</a></li>
+          <% if params[:action] == "show" && @posty.user == current_user %>
+            <li><a href="#" data-reveal-id="edit_modal" data-reveal><i class="fa fa-edit"></i>Edit</a></li>
+            <li><%= link_to post_path(@posty), method: "delete" do %><i class="fa fa-trash-o"></i>Delete<% end %></li>
+          <% end %>
+          <li><a href="/posts"><i class="fa fa-tasks"></i>Posts</a></li>
+          <li><a href="#"><i class="fa fa-info-circle"></i>About</a></li>
+          <li class="has-dropdown">
+            <a href="#"><i class="fa fa-user"></i><%= current_user.username %></a>
+            <ul class="dropdown">
+              <li><a href="/logout"><i class="fa fa-sign-out"></i>Signout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </nav>
+    </div>
+
+    <div class="row margin">
+      <%= yield %>
+    </div>
+
+    <%= javascript_include_tag "application" %>
+    
+  </body>
 </html>

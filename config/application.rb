@@ -25,6 +25,7 @@ module Gistly
 
     # autoload vendor assets
     # config.assets.paths << Rails.root.join("vendor")
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     config.serve_static_assets = true
   end
 end

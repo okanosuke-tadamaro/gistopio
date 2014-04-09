@@ -4,8 +4,10 @@ class PostsController < ApplicationController
 	before_action :authorize_post, only: [:update, :destroy]
 
 	def index
+		@post = new_post
 		@posts = current_user.posts.all
-    @post = new_post
+		dates = @posts.map { |post| post.updated_at.to_date.to_s }.uniq
+		@dated_posts = dates.inject(Array.new) { |array, date| array << [date, @posts.map { |post| post if post.updated_at.to_date.to_s == date }.compact] }
 	end
 
 	def show
@@ -43,7 +45,7 @@ class PostsController < ApplicationController
 		@post = current_user.posts.new
 	end
 
-	def other_user
+	def user_view
 		@user = User.find_by(username: params[:username])
 		@posts =  @user.posts.where(public_status: true)
 		@post = current_user.posts.new

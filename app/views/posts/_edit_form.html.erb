@@ -1,3 +1,4 @@
+<div id="edit_modal" class="reveal-modal" data-reveal>
 <%= form_for @posty, :html => {:class => "new_form"} do |f| %>
 	<p><%= f.label :title %><br>
 	<%= f.text_field :title %></p>
@@ -8,3 +9,4 @@
 	<p><%= f.label :public_status %> <%= f.check_box :public_status %> / <%= f.label :sync_status %> <%= f.check_box :sync_status %></p>
 	<p><%= f.submit %></p>
 <% end %> 
+</div>
