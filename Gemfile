@@ -23,12 +23,13 @@ group :development do
 	gem 'pry'
 	gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'dotenv-rails'
 end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'shoulda-matchers'
+  gem 'dotenv-rails'
+  gem 'capybara'
 end
 
 group :doc do

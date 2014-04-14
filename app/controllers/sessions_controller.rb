@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 	
 	def index
+		redirect_to posts_path if current_user
 		@oauth_link = User.oauth_link
 	end
 	
