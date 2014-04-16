@@ -18,6 +18,7 @@ class PostsController < ApplicationController
 
 	def create
 		@post = current_user.posts.create(post_params)
+		@post.create_title if @post.title == ""
 		Tag.create_tags(@post, params[:tags])
 		@post.create_gist(client) if @post.sync_status
 		redirect_to posts_path

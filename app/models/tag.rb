@@ -3,6 +3,9 @@ class Tag < ActiveRecord::Base
 	validates :name, presence: true
 
 	def self.create_tags(post, tags)
+		if tags == ""
+			tags = "none"
+		end
 		tags.split.each do |tag|
 			if Tag.exists?(name: tag)
 				record = Tag.find_by(name: tag)

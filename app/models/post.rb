@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments
   has_and_belongs_to_many :tags
-  validates :title, :body, presence: true
+  validates :body, presence: true
 
   def self.update(github_access_token)
   	user = User.find_by(github_access_token: github_access_token)
@@ -23,6 +23,12 @@ class Post < ActiveRecord::Base
 
   def synced?
   	gist_id.empty? ? false : true
+  end
+
+  def create_title
+    count = Post.where("created_at > ?", [Date.today.beginning_of_day]).size
+    self.title = "#{Date.today.to_s.gsub("-","_")}_#{count + 1}"
+    self.save
   end
 
   def create_gist(client)
