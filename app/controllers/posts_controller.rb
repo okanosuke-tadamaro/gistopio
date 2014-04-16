@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
 	def index
 		@post = new_post
-		@posts = current_user.posts.all
+		@posts = current_user.posts.order(:created_at).reverse_order
 		dates = @posts.map { |post| post.updated_at.to_date.to_s }.uniq
 		@dated_posts = dates.inject(Array.new) { |array, date| array << [date, @posts.map { |post| post if post.updated_at.to_date.to_s == date }.compact] }
 	end
