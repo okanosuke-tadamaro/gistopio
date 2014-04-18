@@ -3,10 +3,35 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 /* COMMON */
-@font-face { font-family: bebasneue; src: url('<%= asset_path('bebasneue.otf') %>'); }
-.margin { margin-top: 40px; }
+.left { float: left; }
+.right { float: right; }
+.clear { clear: both;}
+
+@font-face {
+	font-family: bebasneue;
+	src: url('<%= asset_path('bebasneue.otf') %>');
+}
+
+body {
+	font-family: 'Source Sans Pro';
+	font-weight: 300;
+}
+
+.wrap {
+	padding: 20px;
+	background-color: #f9f9f9;
+}
+
+.margin {
+	margin-top: 40px;
+}
+
+a { text-decoration: none; }
 i { margin-right: 5px; }
-textarea { font-family: 'PT Mono'; }
+
+textarea {
+	font-family: 'PT Mono';
+}
 
 /* FORMS */
 .form {
@@ -14,7 +39,10 @@ textarea { font-family: 'PT Mono'; }
 		height: 400px;
 		resize: none;
 	}
-	.form_header { font-family: bebasneue; font-weight: bold; }
+	.form_header {
+		font-family: bebasneue;
+		font-weight: bold;
+	}
 }
 
 /* POSTS#INDEX */
@@ -25,115 +53,9 @@ textarea { font-family: 'PT Mono'; }
 	margin-bottom: 10px;
 }
 
-.posts { margin-bottom: 20px; }
-
-.post {
-	height: 200px;
-	background-color: white;
-	border: solid 1px #e2e2e2;
-	overflow: hidden;
-	i, a { color: white; }
-	.post_header {
-		background-color: #c1541c;
-		padding: 5px 10px 5px 10px;
-		height: 35px;
-		h3 {
-			font-size: 16px;
-			margin: 0;
-		}
+.post_blocks {
+	list-style-type: none;
+	li.post_block {
+		
 	}
-	.post_content {
-		padding: 5px 10px 5px 10px;
-		height: 130px;
-		overflow: hidden;
-		pre { overflow: hidden; }
-	}
-	.post_footer {
-		padding: 3px 10px 5px 10px;
-		margin: 0;
-		border-top: solid 1px lightgray;
-		/*background-color: #f4e1e7;*/
-		a { color: gray; }
-		ul {
-			list-style-type: none;
-			margin: 0;
-			li {
-				display: inline;
-				font-size: 14px;
-				margin-right: 5px;
-				i { margin-right: 3px; color: #c1541c; }
-			}
-		}
-	}
-}
-
-/* POSTS#SHOW */
-.each_post {
-	background-color: white;
-	border: solid 1px #e2e2e2;
-	.each_post_header {
-		padding: 10px 15px 10px 15px;
-		background-color: #c1541c;
-		height: 50px;
-		h4 { margin: 0; color: white; font-size: 20px; }
-		.status {
-			color: white;
-			font-size: 20px;
-			i { margin-top: 5px; }
-		}
-	}
-	.each_post_content {
-		padding: 10px 15px 10px 15px;
-		min-height: 300px;
-	}
-	.each_post_footer {
-		padding: 10px 15px 10px 15px;
-		margin: 0;
-		border-top: solid 1px lightgray;
-		/*background-color: #f4e1e7;*/
-		ul {
-			list-style-type: none;
-			margin: 0;
-			li {
-				display: inline;
-				font-size: 14px;
-				margin-right: 5px;
-				i {  }
-			}
-		}
-	}
-}
-
-.comments {
-	margin: 20px 0 20px 0;
-	background-color: white;
-	border: solid 1px #e2e2e2;
-	.comment_header {
-		height: 50px;
-		background-color: lightgray;
-		padding: 0 15px 0 15px;
-		h4 { font-size: 20px; margin: 0; line-height: 50px; }
-	}
-	.comment_form {
-		padding: 10px 15px 10px 15px;
-	}
-	.comment_content {
-		padding: 0 15px 10px 15px;
-		.each_comment {
-			margin-bottom: 10px;
-			.comment_body {
-				padding-left: 10px;
-			}
-		}
-	}
-}
-
-/* POSTS#USER_VIEW */
-.user_view {
-	.username { font-family: bebasneue; font-size: 22px; }
-}
-
-/* POSTS#TAG_VIEW */
-.tag_view {
-	.tag { font-family: bebasneue; font-size: 22px; }
 }

@@ -1,15 +1,15 @@
 <% @dated_posts.each do |date_post| %>
-	<div class="large-2 columns">
+	<div>
 		<div class="date">
 			<%= date_post.first %>
 		</div>
 	</div>
-	<div class="large-10 columns">
-		<ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-3 posts">
+	<div>
+		<ul class="post_blocks">
 		<% date_post.last.each do |post| %>
-			<li>
+			<li class="post_block">
 				<div class="post">
-					<div class="post_header clearfix">
+					<div class="post_header">
 						<h3 class="left"><i class="fa fa-pencil-square"></i><%= link_to post.title, post_path(post) %></h3>
 						<div class="right">
 							<% if post.public_status %>
@@ -22,6 +22,7 @@
 							<% end %>
 						</div>
 					</div>
+					<div class="clear"></div>
 					<div class="post_content"><%= markdown(post.body) %></div>
 					<div class="post_footer">
 						<ul>
@@ -35,8 +36,7 @@
 		<% end %>
 		</ul>
 	</div>
+	<div class="clear"></div>
 <% end %>
-
-
 
 <%= render 'form' %>
