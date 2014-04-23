@@ -1,6 +1,12 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$post_blocks_width: 980px + 15px;
+$post_width:(980px - 45px) / 4;
+$post_margin:15px;
+$post_height:200px;
+
 body {
 	font-family: 'Roboto Condensed';
 	background-image: url('<%= asset_path('background.png') %>');
@@ -35,9 +41,10 @@ textarea {
 }
 
 /* FORMS */
-.form {
+.new_form {
 	textarea {
 		height: 400px;
+		width: 100%;
 		resize: none;
 	}
 	.form_header {
@@ -58,11 +65,6 @@ textarea {
 	margin-bottom: 10px;
 }
 
-$post_blocks_width: 980px + 15px;
-$post_width:(980px - 45px) / 4;
-$post_margin:15px;
-$post_height:200px;
-
 .post_wrap {
 	width: 980px;
 }
@@ -79,26 +81,27 @@ $post_height:200px;
 		width: $post_width;
 		height: $post_height;
 		background-color: #f9f9f9;
+		box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
+		font-size: 14px;
 		position: relative;
 		.post_header {
 			height: 30px;
 			line-height: 30px;
-			padding: 0 5px 0 5px;
+			padding: 0 10px 0 10px;
 			overflow: hidden;
-			background-color: rgba(0, 0, 0, 0.01);
-			border-bottom: solid 1px lightgray;
+			background-color: rgba(0, 0, 0, 0.05);
+			/*border-bottom: solid 1px lightgray;*/
 		}
 		.post_content {
-			height: 130px;
-			padding: 5px 5px 5px 5px;
+			height: 120px;
+			padding: 10px 10px 10px 10px;
 			overflow: hidden;
-			font-size: 14px;
+			pre { overflow: hidden; }
 		}
 		.post_footer {
 			height: 30px;
 			line-height: 30px;
-			font-size: 14px;
-			padding: 0 5px 0 5px;
+			padding: 0 10px 0 10px;
 			ul {
 				list-style-type: none;
 				li { display: inline;}
