@@ -1,6 +1,11 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+	font-family: 'Roboto Condensed';
+	background-image: url('<%= asset_path('background.png') %>');
+	background-attachment: fixed;
+}
 
 /* COMMON */
 .left { float: left; }
@@ -12,22 +17,18 @@
 	src: url('<%= asset_path('bebasneue.otf') %>');
 }
 
-body {
-	font-family: 'Source Sans Pro';
-	font-weight: 300;
-}
-
 .wrap {
-	padding: 20px;
-	background-color: #f9f9f9;
+	width: 980px;
+	padding-top: 50px;
+	margin: 0 auto;
 }
 
 .margin {
 	margin-top: 40px;
 }
 
-a { text-decoration: none; }
-i { margin-right: 5px; }
+a { color: #9F353A; text-decoration: none; }
+i { margin-right: 3px; color: #9F353A; }
 
 textarea {
 	font-family: 'PT Mono';
@@ -46,6 +47,10 @@ textarea {
 }
 
 /* POSTS#INDEX */
+.post_row {
+	margin-bottom: 30px;
+}
+
 .date {
 	font-family: 'bebasneue';
 	font-size: 30px;
@@ -53,9 +58,69 @@ textarea {
 	margin-bottom: 10px;
 }
 
+$post_blocks_width: 980px + 15px;
+$post_width:(980px - 45px) / 4;
+$post_margin:15px;
+$post_height:200px;
+
+.post_wrap {
+	width: 980px;
+}
+
 .post_blocks {
+	width: $post_blocks_width;
+	margin-right: -15px;
 	list-style-type: none;
 	li.post_block {
-		
+		float: left;
+		display: box;
+		margin-right: $post_margin;
+		margin-bottom: 15px;
+		width: $post_width;
+		height: $post_height;
+		background-color: #f9f9f9;
+		position: relative;
+		.post_header {
+			height: 30px;
+			line-height: 30px;
+			padding: 0 5px 0 5px;
+			overflow: hidden;
+			background-color: rgba(0, 0, 0, 0.01);
+			border-bottom: solid 1px lightgray;
+		}
+		.post_content {
+			height: 130px;
+			padding: 5px 5px 5px 5px;
+			overflow: hidden;
+			font-size: 14px;
+		}
+		.post_footer {
+			height: 30px;
+			line-height: 30px;
+			font-size: 14px;
+			padding: 0 5px 0 5px;
+			ul {
+				list-style-type: none;
+				li { display: inline;}
+			}
+		}		
+	}
+	li.post_block:after {
+		background: none repeat scroll 0 0 #777777;
+    bottom: 18px;
+    box-shadow: 0 15px 10px #777777;
+    content: "";
+    left: auto;
+    max-width: 300px;
+    position: absolute;
+    right: 10px;
+    top: 80%;
+    transform: rotate(3deg);
+    -webkit-transform: rotate(3deg);
+    -moz-transform: rotate(3deg);
+    -ms-transform: rotate(3deg);
+    -o-transform: rotate(3deg);
+    width: 50%;
+    z-index: -1;
 	}
 }

@@ -10,6 +10,7 @@
  *
  *= require_reset
  *= require_self
+ *= require_widearea.min
  *= require_tomorrow_night
  *= require_tree .
  */

@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require textarea_tab
 //= require turbolinks
+//= require widearea.min
+//= require mousetrap
 //= require_tree .

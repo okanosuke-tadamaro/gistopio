@@ -1,42 +1,40 @@
 <% @dated_posts.each do |date_post| %>
-	<div>
-		<div class="date">
-			<%= date_post.first %>
-		</div>
+	<div class="post_row">
+	<div class="date">
+		<%= date_post.first %>
 	</div>
-	<div>
+	<div class="post_wrap">
 		<ul class="post_blocks">
 		<% date_post.last.each do |post| %>
-			<li class="post_block">
-				<div class="post">
-					<div class="post_header">
-						<h3 class="left"><i class="fa fa-pencil-square"></i><%= link_to post.title, post_path(post) %></h3>
-						<div class="right">
-							<% if post.public_status %>
-								<i class="fa fa-unlock"></i>
-							<% else %>
-								<i class="fa fa-lock"></i>
-							<% end %>
-							<% if post.sync_status %>
-								<i class="fa fa-github"></i>
-							<% end %>
-						</div>
-					</div>
-					<div class="clear"></div>
-					<div class="post_content"><%= markdown(post.body) %></div>
-					<div class="post_footer">
-						<ul>
-						<% post.tags.each do |tag| %>
-							<li><i class="fa fa-tag"></i><%= link_to tag.name, "/posts/tags/#{tag.name}" %></li>
+			<li class="post_block effect4">
+				<div class="post_header">
+					<h3 class="left"><i class="fa fa-pencil-square"></i><%= link_to post.title, post_path(post) %></h3>
+					<div class="right">
+						<% if post.public_status %>
+							<i class="fa fa-unlock"></i>
+						<% else %>
+							<i class="fa fa-lock"></i>
 						<% end %>
-						</ul>
+						<% if post.sync_status %>
+							<i class="fa fa-github"></i>
+						<% end %>
 					</div>
+				</div>
+				<div class="clear"></div>
+				<div class="post_content"><%= markdown(post.body) %></div>
+				<div class="post_footer">
+					<ul>
+					<% post.tags.each do |tag| %>
+						<li><i class="fa fa-tag"></i><%= link_to tag.name, "/posts/tags/#{tag.name}" %></li>
+					<% end %>
+					</ul>
 				</div>
 			</li>
 		<% end %>
 		</ul>
 	</div>
 	<div class="clear"></div>
+	</div>
 <% end %>
 
 <%= render 'form' %>
