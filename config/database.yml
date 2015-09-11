@@ -3,7 +3,7 @@ development:
   encoding: unicode
   database: gistly_development
   pool: 5
-  username: tadashiokazaki
+  username: tadashi
   password:
 
 test:
@@ -11,7 +11,7 @@ test:
   encoding: unicode
   database: gistly_test
   pool: 5
-  username: tadashiokazaki
+  username: tadashi
   password:
 
 production:
